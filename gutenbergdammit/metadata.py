@@ -22,7 +22,8 @@ def fix_year(year_string):
 
 class MetadataReader:
 
-    wanted_tags = set(["Author","Title", "LoC Class", "Subject", "Language"])
+    wanted_tags = set(["Author","Title", "LoC Class", "Subject", "Language",
+        "Copyright Status"])
 
     def get_metatag_contents(self,html,tag):
         index = html.find('<th scope="row">%s</th>' % tag)
@@ -223,7 +224,10 @@ class MetadataReaderRDF:
                 if end_index == -1:
                     add_next_line_to_title = True
                 tag_dict["Title"].append(line[start_index:end_index])
-
+            elif "<dcterms:rights>" in line:
+                start_index = line.find(">") + 1
+                end_index = line.find("<",start_index)
+                tag_dict["Copyright Status"] = [line[start_index:end_index]]
             elif "RFC4646" in line:
                 start_index = line.find(">") + 1
                 lang = line[start_index:start_index + 2]
