@@ -1,6 +1,7 @@
 # code based on/adapted from https://github.com/julianbrooke/GutenTag
 # Creative Commons Attribution-ShareAlike 4.0 International
 
+import re
 import os
 import zipfile
 
@@ -21,9 +22,10 @@ def setup_tag_dict(filename, corpus_dir="./PGUS"):
     return tag_dict
 
 def text_info_iter(corpus_dir="./PGUS"):
-    filenames = os.listdir(corpus_dir + "/" + "ETEXT")
-    if os.path.exists(corpus_dir + "/" + "ETEXT_SUP"):
-        filenames.extend(os.listdir(corpus_dir + "/" + "ETEXT_SUP"))
+    filenames = os.listdir(corpus_dir + "/ETEXT")
+    if os.path.exists(corpus_dir + "/ETEXT_SUP"):
+        filenames.extend(os.listdir(corpus_dir + "/ETEXT_SUP"))
+    filenames.sort(key=lambda x: int(re.findall(r"^(\d+)\..*$", x)[0]))
     for filename in filenames:
         tag_dict = setup_tag_dict(filename, corpus_dir)
         yield tag_dict
