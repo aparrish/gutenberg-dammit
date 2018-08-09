@@ -23,6 +23,12 @@ if __name__ == '__main__':
     parser.add_option("-m", "--metadata-file",
             help="path to metadata file for output (will be overwritten)",
             default="./gutenberg-metadata.json")
+    parser.add_option("-l", "--limit", type="int",
+            help="limit to n entries (good for testing)",
+            default=None)
+    parser.add_option("-o", "--offset", type="int",
+            help="start at index n (good for testing)",
+            default=0)
     options, _ = parser.parse_args()
 
     errors = []
@@ -32,6 +38,8 @@ if __name__ == '__main__':
     err("Processing input from GutenTag dump at", options.src_path, "...")
 
     for i, item in enumerate(text_info_iter(corpus_dir=options.src_path)):
+        if i < options.offset:
+            continue
         try:
             raw_text = get_plain_text(item["href"], item["charset"],
                     corpus_dir=options.src_path)
@@ -49,7 +57,10 @@ if __name__ == '__main__':
             metadata.append(item)
             if i % 1000 == 0:
                 err("processing", item["Num"], "-", item["Title"][0])
-        except (BadZipFile, NotImplementedError) as e:
+            if options.limit is not None and i > options.offset + options.limit:
+                err("Stopping early (--limit)")
+                break
+        except (BadZipFile, NotImplementedError, FileNotFoundError) as e:
             errors.append((item, e))
 
     err("Done.")
