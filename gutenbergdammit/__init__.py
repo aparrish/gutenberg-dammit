@@ -35,9 +35,16 @@ def get_plain_text(href, charset, corpus_dir="./PGUS"):
     if charset not in encodings:
         charset = [charset] + encodings
     # FIXME: platform-independent path joining
-    with zipfile.ZipFile(corpus_dir + href.upper()) as my_zip:
+    # if it looks like a text file...
+    if href.lower().endswith(".txt"):
         for enc in encodings:
-            with my_zip.open(my_zip.namelist()[0]) as f:
-                raw_text = f.read().decode(enc)
+            with open(corpus_dir + href, encoding=enc) as fh:
+                raw_text = fh.read()
                 return raw_text
+    else: # otherwise assume zip
+        with zipfile.ZipFile(corpus_dir + href.upper()) as my_zip:
+            for enc in encodings:
+                with my_zip.open(my_zip.namelist()[0]) as f:
+                    raw_text = f.read().decode(enc)
+                    return raw_text
 
