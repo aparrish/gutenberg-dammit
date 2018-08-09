@@ -49,8 +49,6 @@ if __name__ == '__main__':
             metadata.append(item)
             if i % 1000 == 0:
                 err("processing", item["Num"], "-", item["Title"][0])
-            if i == 100:
-                break
         except (BadZipFile, NotImplementedError) as e:
             errors.append((item, e))
 
@@ -58,7 +56,7 @@ if __name__ == '__main__':
     err("Writing metadata...")
     metadata.sort(key=lambda x: x["gd-num-padded"])
     with open(options.metadata_file, "w") as fh:
-        json.dump(metadata, fh, indent=4)
+        json.dump(metadata, fh, indent=4, sort_keys=True)
     err("Done.")
 
     if len(errors) > 0:
