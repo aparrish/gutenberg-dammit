@@ -198,6 +198,8 @@ welcome.
   recent entries collected via web scraping?)
 * Implement a process for adding newer files to the corpus (by looking at the
   [RSS feed](http://www.gutenberg.org/wiki/Gutenberg:Feeds)?)
+* Make the corpus zip file into a torrent or something so I'm not paying for
+  every download
 
 ## Works cited
 
