@@ -119,6 +119,9 @@ The lower-case fields are metadata specific to this corpus, explained below:
   file itself.
 * `href`: The path to the file in the original GutenTag corpus.
 
+> NOTE: Not all records have every field, and not every field is guaranteed to
+> be non-empty.
+
 #### What was included, what was left out
 
 First off, *Gutenberg, dammit* is based on files from [Project
