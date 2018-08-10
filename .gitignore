@@ -50,3 +50,5 @@ docs/_build
 # project-specific
 output
 gutenberg-metadata.json
+gutenberg-dammit-files
+*.zip
