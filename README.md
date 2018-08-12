@@ -119,7 +119,7 @@ to accommodate books that (e.g.) have more than one author or title.
 The lower-case fields are metadata specific to this corpus, explained below:
 
 * `charset`: The character set of the original file. All of the files in the
-  ZIP are in UTF8 encoding, so this is only helpful if (e.g.) you're using the
+  ZIP are in UTF-8 encoding, so this is only helpful if (e.g.) you're using the
   metadata to refer back to the original file on the Gutenberg website.
 * `gd-num-padded`: The book number ("Gutenberg ID") left-padded to five digits
   with zeros.
@@ -156,7 +156,7 @@ doesn't mean you always have a right to use its words.
 
 #### Character encodings
 
-The included text files are all encoded as UTF8. When decoding from Project
+The included text files are all encoded as UTF-8. When decoding from Project
 Gutenberg, decoding is first attempted using the encoding declared in the
 file's metadata; if that decoding doesn't work, [`chardet`'s `detect`
 function](https://chardet.readthedocs.io/en/latest/usage.html#basic-usage) is
@@ -174,7 +174,7 @@ corpus, read on.
 The scripts in this repository work on the files prepared by
 [GutenTag](http://www.cs.toronto.edu/~jbrooke/gutentag/download.html). In order
 to use the scripts, you'll need to download their corpus ("Our (full) Project
-Gutenberg Corpus", ~7Gb ZIP file) and unzip it into a directory on your system.
+Gutenberg Corpus", ~7 GB ZIP file) and unzip it into a directory on your system.
 
 The included package `gutenbergdammit/build.py` is designed to be used as a
 command-line script. Run it on the command line like so:
