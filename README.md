@@ -37,30 +37,36 @@ or use them directly by installing this package from the repo:
 First, download the ZIP archive and put it in the same directory as your Python
 code. Then, to (e.g.) retrieve the text of one particular file from the corpus:
 
-    >>> from gutenbergdammit.ziputils import retrieve_one
-    >>> text = retrieve_one("gutenberg-dammit-files-v002.zip", "123/12345.txt")
-    >>> text[:50]
-    '[Illustration: "I saw there something missing from'
+```python
+>>> from gutenbergdammit.ziputils import retrieve_one
+>>> text = retrieve_one("gutenberg-dammit-files-v002.zip", "123/12345.txt")
+>>> text[:50]
+'[Illustration: "I saw there something missing from'
+```
 
 To retrieve the metadata file:
 
-    >>> from gutenbergdammit.ziputils import loadmetadata
-    >>> metadata = loadmetadata("gutenberg-dammit-files-v002.zip")
-    >>> metadata[456]['Title']
-    ['Essays in the Art of Writing']
+```python
+>>> from gutenbergdammit.ziputils import loadmetadata
+>>> metadata = loadmetadata("gutenberg-dammit-files-v002.zip")
+>>> metadata[456]['Title']
+['Essays in the Art of Writing']
+```
 
 To search for and retrieve files whose metadata contains particular strings:
 
-    >>> from gutenbergdammit.ziputils import searchandretrieve
-    >>> for info, text in searchandretrieve("gutenberg-dammit-files-v002.zip", {'Title': 'Made Easy'}):
-    ...     print(info['Title'][0], len(text))
-    ... 
-    Entertaining Made Easy 108314
-    Reading Made Easy for Foreigners - Third Reader 209964
-    The Art of Cookery Made Easy and Refined 262990
-    Shaving Made Easy	What the Man Who Shaves Ought to Know 44982
-    Writing and Drawing Made Easy, Amusing and Instructive	Containing The Whole Alphabet in all the Characters now	us'd, Both in Printing and Penmanship 10036
-    Etiquette Made Easy 119770
+```python
+>>> from gutenbergdammit.ziputils import searchandretrieve
+>>> for info, text in searchandretrieve("gutenberg-dammit-files-v002.zip", {'Title': 'Made Easy'}):
+...     print(info['Title'][0], len(text))
+... 
+Entertaining Made Easy 108314
+Reading Made Easy for Foreigners - Third Reader 209964
+The Art of Cookery Made Easy and Refined 262990
+Shaving Made Easy	What the Man Who Shaves Ought to Know 44982
+Writing and Drawing Made Easy, Amusing and Instructive	Containing The Whole Alphabet in all the Characters now	us'd, Both in Printing and Penmanship 10036
+Etiquette Made Easy 119770
+```
 
 ### Details
 
@@ -85,23 +91,25 @@ should have.
 The `gutenberg-metadata.json` file in the zip is a big JSON file with metadata on
 each book. The is a list of JSON objects with the following format:
 
-    {
-        "Author": [ "Robert Carlton Brown" ],
-        "Author Birth": [ 1886 ],
-        "Author Death": [ 1959 ],
-        "Author Given": [ "Robert Carlton" ],
-        "Author Surname": [ "Brown" ],
-        "Copyright Status": [ "Not copyrighted in the United States." ],
-        "Language": [ "English" ],
-        "LoC Class": [ "SF: Agriculture: Animal culture" ],
-        "Num": "14293",
-        "Subject": [ "Cookery (Cheese)", "Cheese" ],
-        "Title": [ "The Complete Book of Cheese" ],
-        "charset": "iso-8859-1",
-        "gd-num-padded": "14293",
-        "gd-path": "142/14293.txt",
-        "href": "/1/4/2/9/14293/14293_8.zip"
-    }
+```json
+{
+    "Author": [ "Robert Carlton Brown" ],
+    "Author Birth": [ 1886 ],
+    "Author Death": [ 1959 ],
+    "Author Given": [ "Robert Carlton" ],
+    "Author Surname": [ "Brown" ],
+    "Copyright Status": [ "Not copyrighted in the United States." ],
+    "Language": [ "English" ],
+    "LoC Class": [ "SF: Agriculture: Animal culture" ],
+    "Num": "14293",
+    "Subject": [ "Cookery (Cheese)", "Cheese" ],
+    "Title": [ "The Complete Book of Cheese" ],
+    "charset": "iso-8859-1",
+    "gd-num-padded": "14293",
+    "gd-path": "142/14293.txt",
+    "href": "/1/4/2/9/14293/14293_8.zip"
+}
+```
 
 The capitalized fields correspond to the fields in the official Project
 Gutenberg metadata, with information about the author broken out into the
@@ -171,8 +179,10 @@ Gutenberg Corpus", ~7Gb ZIP file) and unzip it into a directory on your system.
 The included package `gutenbergdammit/build.py` is designed to be used as a
 command-line script. Run it on the command line like so:
 
-    python -m gutenbergdammit.build --src-path=<path to your gutentag download> \
-        --dest-path=output --metadata-file=output/gutenberg-metadata.json \
+```bash
+python -m gutenbergdammit.build --src-path=<path to your gutentag download> \
+    --dest-path=output --metadata-file=output/gutenberg-metadata.json \
+```
 
 Help on the options:
 
@@ -201,7 +211,9 @@ some of the files in the Gutenberg archive ("implosion"). Whoops. Included in
 the repository is a script that unzips and re-zips these files using a modern
 compression algorithm. To run it:
 
-    python -m gutenbergdammit.findbadzips --src-path=<gutentag_dump> --fix
+```bash
+python -m gutenbergdammit.findbadzips --src-path=<gutentag_dump> --fix
+```
 
 This will modify the ~100 files in your GutenTag dump with broken ZIP
 compression, and save copies of the originals (with `-orig` at the end of the
