@@ -134,10 +134,17 @@ Only Gutenberg items with plaintext files are included in this corpus. It
 doesn't include audiobooks, and it doesn't include any books only available
 in text formats other than plaintext (e.g., PDF or HTML).
 
-In some cases, books that are primarily available in some non-plaintext format
-will include a "stub" text file that just tells the reader to look at the other
-file. No attempt has been made to systematically exclude these from the present
-corpus.
+In some cases, documents that are primarily available in some non-plaintext
+format will include a "stub" text file that just tells the reader to look at
+the other file. No attempt has been made to systematically exclude these from
+the present corpus.
+
+Project Gutenberg includes a number of documents with content that is
+offensive. Given their possible academic and historical value, no effort has
+been made to systematically exclude these documents from this corpus. Please
+take care when including such documents (and portions thereof) in any analysis
+or creative reinterpretations. Just because a book is in the public domain
+doesn't mean you always have a right to use its words.
 
 #### Character encodings
 
