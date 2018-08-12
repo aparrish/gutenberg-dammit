@@ -1,6 +1,6 @@
 # Gutenberg, dammit
 
-By [Allison Parrish](http://www.decontextualize.com/)
+By [Allison Parrish](https://www.decontextualize.com/)
 
 *Gutenberg, dammit* is a corpus of every plaintext file in Project Gutenberg (up
 until June 2016), organized in a consistent fashion, with (mostly?) consistent
@@ -14,7 +14,7 @@ The name of the corpus was inspired by Leonard Richardson's [Unicode,
 dammit](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#unicode-dammit).
 
 Code in this repository relies on the data prepared by the [GutenTag
-project](http://www.cs.toronto.edu/~jbrooke/gutentag/) (Brooke 2015) and the
+project](https://www.cs.toronto.edu/~jbrooke/gutentag/) (Brooke 2015) and the
 code is partially based on the [GutenTag source
 code](https://github.com/julianbrooke/GutenTag).
 
@@ -59,7 +59,7 @@ To search for and retrieve files whose metadata contains particular strings:
 >>> from gutenbergdammit.ziputils import searchandretrieve
 >>> for info, text in searchandretrieve("gutenberg-dammit-files-v002.zip", {'Title': 'Made Easy'}):
 ...     print(info['Title'][0], len(text))
-... 
+...
 Entertaining Made Easy 108314
 Reading Made Easy for Foreigners - Third Reader 209964
 The Art of Cookery Made Easy and Refined 262990
@@ -134,7 +134,7 @@ The lower-case fields are metadata specific to this corpus, explained below:
 #### What was included, what was left out
 
 First off, *Gutenberg, dammit* is based on files from [Project
-Gutenberg](http://www.gutenberg.org/), and doesn't include files from any of
+Gutenberg](https://www.gutenberg.org/), and doesn't include files from any of
 the related international projects (e.g. Project Gutenberg Canada, Project
 Gutenberg Australia).
 
@@ -172,9 +172,10 @@ follows. If you want to be able to recreate the process of how I made the
 corpus, read on.
 
 The scripts in this repository work on the files prepared by
-[GutenTag](http://www.cs.toronto.edu/~jbrooke/gutentag/download.html). In order
-to use the scripts, you'll need to download their corpus ("Our (full) Project
-Gutenberg Corpus", ~7 GB ZIP file) and unzip it into a directory on your system.
+[GutenTag](https://www.cs.toronto.edu/~jbrooke/gutentag/download.html). In
+order to use the scripts, you'll need to download their corpus ("Our (full)
+Project Gutenberg Corpus", ~7 GB ZIP file) and unzip it into a directory on
+your system.
 
 The included package `gutenbergdammit/build.py` is designed to be used as a
 command-line script. Run it on the command line like so:
@@ -232,7 +233,7 @@ welcome.
   GutenTag corpus, which is a combination of the 2010 DVD ISO and I think more
   recent entries collected via web scraping?)
 * Implement a process for adding newer files to the corpus (by looking at the
-  [RSS feed](http://www.gutenberg.org/wiki/Gutenberg:Feeds)?)
+  [RSS feed](https://www.gutenberg.org/wiki/Gutenberg:Feeds)?)
 * Make the corpus zip file into a torrent or something so I'm not paying for
   every download
 
@@ -240,7 +241,7 @@ welcome.
 
 Brooke, Julian, et al. “[GutenTag: An NLP-Driven Tool for Digital Humanities
 Research in the Project Gutenberg
-Corpus](http://www.cs.toronto.edu/pub/gh/Brooke-etal-2015-CLfL.pdf).” CLfL@
+Corpus](https://www.cs.toronto.edu/pub/gh/Brooke-etal-2015-CLfL.pdf).” CLfL@
 NAACL-HLT, 2015, pp. 42–47.
 
 ## Version history
@@ -255,6 +256,6 @@ In accordance with GutenTag's license:
 
 This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
 International License. To view a copy of this license, visit
-http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+https://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
 Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
 
