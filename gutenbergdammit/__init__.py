@@ -4,6 +4,7 @@
 import re
 import os
 import zipfile
+import chardet
 
 from gutenbergdammit.textcleaner import TextCleaner
 from gutenbergdammit.metadata import MetadataReader, MetadataReaderRDF
@@ -30,21 +31,30 @@ def text_info_iter(corpus_dir="./PGUS"):
         tag_dict = setup_tag_dict(filename, corpus_dir)
         yield tag_dict
 
+def try_to_decode(raw_text, charset):
+    try:
+        decoded = raw_text.decode(charset)
+        return decoded
+    except (LookupError, UnicodeDecodeError) as e:
+        detected = chardet.detect(raw_text)
+        try:
+            decoded = raw_text.decode(detected['encoding'])
+            return decoded
+        except (TypeError, LookupError, UnicodeDecodeError) as e:
+            # last ditch: maybe it's just iso-8859-1?
+            decoded = raw_text.decode("iso-8859-1")
+            return decoded
+
 def get_plain_text(href, charset, corpus_dir="./PGUS"):
-    encodings = ["latin-1", "utf-8"]
-    if charset not in encodings:
-        charset = [charset] + encodings
     # FIXME: platform-independent path joining
     # if it looks like a text file...
     if href.lower().endswith(".txt"):
-        for enc in encodings:
-            with open(corpus_dir + href, encoding=enc) as fh:
-                raw_text = fh.read()
-                return raw_text
+        with open(corpus_dir + href, "rb") as fh:
+            raw_text = fh.read()
+            return try_to_decode(raw_text, charset)
     else: # otherwise assume zip
         with zipfile.ZipFile(corpus_dir + href.upper()) as my_zip:
-            for enc in encodings:
-                with my_zip.open(my_zip.namelist()[0]) as f:
-                    raw_text = f.read().decode(enc)
-                    return raw_text
+            with my_zip.open(my_zip.namelist()[0]) as f:
+                raw_text = f.read()
+                return try_to_decode(raw_text, charset)
 

@@ -60,7 +60,8 @@ if __name__ == '__main__':
             if options.limit is not None and i > options.offset + options.limit:
                 err("Stopping early (--limit)")
                 break
-        except (BadZipFile, NotImplementedError, FileNotFoundError) as e:
+        except (UnicodeDecodeError, BadZipFile, NotImplementedError,
+                FileNotFoundError) as e:
             errors.append((item, e))
 
     err("Done.")

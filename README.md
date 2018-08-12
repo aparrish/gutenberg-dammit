@@ -8,7 +8,7 @@ metadata. The intended purpose of the corpus is to make it really easy to do
 creative things with this wonderful and amazing body of freely-available text.
 
 [Download the corpus
-here.](http://static.decontextualize.com/gutenberg-dammit-files-001.zip)
+here.](http://static.decontextualize.com/gutenberg-dammit-files-v002.zip)
 
 The name of the corpus was inspired by Leonard Richardson's [Unicode,
 dammit](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#unicode-dammit).
@@ -34,24 +34,25 @@ or use them directly by installing this package from the repo:
 
     pip install https://github.com/aparrish/gutenberg-dammit/archive/master.zip
 
-For example, to retrieve the text of one particular file from the corpus:
+First, download the ZIP archive and put it in the same directory as your Python
+code. Then, to (e.g.) retrieve the text of one particular file from the corpus:
 
     >>> from gutenbergdammit.ziputils import retrieve_one
-    >>> text = retrieve_one("gutenberg-dammit-files-001.zip", "123/12345.txt")
+    >>> text = retrieve_one("gutenberg-dammit-files-v002.zip", "123/12345.txt")
     >>> text[:50]
     '[Illustration: "I saw there something missing from'
 
 To retrieve the metadata file:
 
     >>> from gutenbergdammit.ziputils import loadmetadata
-    >>> metadata = loadmetadata("gutenberg-dammit-files-001.zip")
+    >>> metadata = loadmetadata("gutenberg-dammit-files-v002.zip")
     >>> metadata[456]['Title']
     ['Essays in the Art of Writing']
 
 To search for and retrieve files whose metadata contains particular strings:
 
     >>> from gutenbergdammit.ziputils import searchandretrieve
-    >>> for info, text in searchandretrieve("gutenberg-dammit-files-001.zip", {'Title': 'Made Easy'}):
+    >>> for info, text in searchandretrieve("gutenberg-dammit-files-v002.zip", {'Title': 'Made Easy'}):
     ...     print(info['Title'][0], len(text))
     ... 
     Entertaining Made Easy 108314
@@ -138,6 +139,17 @@ will include a "stub" text file that just tells the reader to look at the other
 file. No attempt has been made to systematically exclude these from the present
 corpus.
 
+#### Character encodings
+
+The included text files are all encoded as UTF8. When decoding from Project
+Gutenberg, decoding is first attempted using the encoding declared in the
+file's metadata; if that decoding doesn't work, [`chardet`'s `detect`
+function](https://chardet.readthedocs.io/en/latest/usage.html#basic-usage) is
+used to determine the most likely encoding, and that encoding is used instead.
+If Python still raises an error when attempting to decode using `chardet`'s
+guess, ISO-8859-1 is tried as a last resort. If none of this worked, then the
+file is left out of the archive.
+
 ## How to *Gutenberg, dammit* from scratch
 
 If you just want to *use* the corpus, don't bother with any of the content that
@@ -211,6 +223,12 @@ Brooke, Julian, et al. “[GutenTag: An NLP-Driven Tool for Digital Humanities
 Research in the Project Gutenberg
 Corpus](http://www.cs.toronto.edu/pub/gh/Brooke-etal-2015-CLfL.pdf).” CLfL@
 NAACL-HLT, 2015, pp. 42–47.
+
+## Version history
+
+* v0.0.2 (2018-08-11): Fixed character encoding problems and released new
+  version of the archive with resulting encodings
+* v0.0.1 (2018-08-10): Initial release.
 
 ## License
 
