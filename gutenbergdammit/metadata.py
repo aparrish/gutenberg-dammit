@@ -60,7 +60,6 @@ class MetadataReader:
                 if len(parts) == 2:
                     given = parts[0]
                     surname = parts[1]
-                    found_names = True
 
             if given:
                 tags["Author Given"].append(given)

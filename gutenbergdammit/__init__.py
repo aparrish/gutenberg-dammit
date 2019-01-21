@@ -6,7 +6,6 @@ import os
 import zipfile
 import chardet
 
-from gutenbergdammit.textcleaner import TextCleaner
 from gutenbergdammit.metadata import MetadataReader, MetadataReaderRDF
 
 def setup_tag_dict(filename, corpus_dir="./PGUS"):
@@ -35,12 +34,12 @@ def try_to_decode(raw_text, charset):
     try:
         decoded = raw_text.decode(charset)
         return decoded
-    except (LookupError, UnicodeDecodeError) as e:
+    except (LookupError, UnicodeDecodeError):
         detected = chardet.detect(raw_text)
         try:
             decoded = raw_text.decode(detected['encoding'])
             return decoded
-        except (TypeError, LookupError, UnicodeDecodeError) as e:
+        except (TypeError, LookupError, UnicodeDecodeError):
             # last ditch: maybe it's just iso-8859-1?
             decoded = raw_text.decode("iso-8859-1")
             return decoded
