@@ -1,0 +1,20 @@
+environment:
+
+  matrix:
+    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python37"
+    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python37-x64"
+
+install:
+  - "%PYTHON%\\python.exe -m pip install -U pip"
+  - "%PYTHON%\\python.exe -m pip install -U pyflakes"
+
+build: off
+
+test_script:
+  # Static analysis
+  - "%PYTHON%\\python.exe -m pyflakes ."
+
+  # Test install
+  - "%PYTHON%\\python.exe setup.py install"
