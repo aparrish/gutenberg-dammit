@@ -1,4 +1,3 @@
-import sys
 import os
 import subprocess
 from os.path import join as opj
