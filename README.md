@@ -8,7 +8,7 @@ metadata. The intended purpose of the corpus is to make it really easy to do
 creative things with this wonderful and amazing body of freely-available text.
 
 [Download the corpus
-here.](http://static.decontextualize.com/gutenberg-dammit-files-v002.zip)
+here.](http://static.decontextualize.com/gutenberg-dammit-files-v002.zip) **(6.4GB)**
 
 The name of the corpus was inspired by Leonard Richardson's [Unicode,
 dammit](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#unicode-dammit).
